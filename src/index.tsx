@@ -5,11 +5,16 @@ import './index.css'
 import Home from './views/home'
 import reportWebVitals from './reportWebVitals'
 
+
+const { BrowserRouter } = require('react-router-dom')
+
 ReactDOM.render(
-    <React.StrictMode>
-        <Home />
-    </React.StrictMode>,
-    document.getElementById('root')
+	<React.StrictMode>
+		<BrowserRouter>
+			<Home />
+		</BrowserRouter>
+	</React.StrictMode>,
+	document.getElementById('root')
 )
 
 // If you want to start measuring performance in your app, pass a function
