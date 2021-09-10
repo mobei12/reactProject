@@ -30,7 +30,7 @@ const routes: Array<routerObj> = [
 	{
 		path: '/statistics/overallStatistics',
 		exact: false,
-		name: '个人统计',
+		name: '整体统计',
 		component: overallStatistics
 	},
 	{
