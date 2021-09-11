@@ -1,5 +1,6 @@
 import './index.scss'
 import React from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 
 
 const { Route, Switch, Link, Redirect } = require('react-router-dom')
@@ -25,13 +26,27 @@ const menu = (
 	</Menu>
 )
 
-export default class Home extends React.Component {
+export default class Home extends React.Component<RouteComponentProps> {
 	state = {
 		collapsed: false,
 		key: 'personalStatistics'
 	}
+
+	constructor(props: RouteComponentProps) {
+		super(props)
+	}
+
+	isLogin = () => {
+		if (!localStorage.getItem('user')) {
+			this.props.history.push('/login')
+		}
+	}
 	onCollapse = (collapsed: boolean) => {
 		this.setState({ collapsed })
+	}
+
+	componentDidMount() {
+		this.isLogin()
 	}
 
 	render() {

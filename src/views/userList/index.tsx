@@ -17,7 +17,6 @@ export default class UserList extends React.Component {
 			responseType: 'json',
 			params: {}
 		}).then((response) => {
-			console.log(response)
 			this.setState({ datas: JSON.parse(response.data) })
 		})
 	}

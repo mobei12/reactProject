@@ -1,18 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-//import App from './App'
-import Home from './views/home'
+import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 
-const { BrowserRouter } = require('react-router-dom')
-
 ReactDOM.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<Home />
-		</BrowserRouter>
+		<App />
 	</React.StrictMode>,
 	document.getElementById('root')
 )
