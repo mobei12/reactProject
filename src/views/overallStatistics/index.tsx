@@ -1,7 +1,8 @@
 import './index.scss'
 
 import React from 'react'
-import { Table, Space } from 'antd'
+import { Table, Space, Tag } from 'antd'
+import { translateDate } from '../../utils/util'
 import Axios from '../../utils/http'
 
 
@@ -14,7 +15,7 @@ export default class OverallStatistics extends React.Component {
 		Axios('/api/exerciseRecord/findAll', {
 			method: 'GET',
 			responseType: 'json',
-			data: {}
+			params: {}
 		}).then((response) => {
 			this.setState({ datas: JSON.parse(response.data) })
 		})
@@ -29,9 +30,20 @@ export default class OverallStatistics extends React.Component {
 		return (
 			<div className='App'>
 				<Table dataSource={datas}>
-					<Column title='用户id ' dataIndex='user_id' key='user_id' />
-					<Column title='运动类型 ' dataIndex='exercise_type'
-					        key='exercise_type' />
+					<Column
+						title='用户名 '
+						dataIndex='users'
+						key='users'
+						render={(text) => <Space
+							size='middle'>{text[0].username}</Space>}
+					/>
+					<Column
+						title='运动类型 '
+						dataIndex='exercise_type'
+						key='exercise_type'
+						render={(text) => <Tag
+							color={'blue'}>{text.toUpperCase()}</Tag>}
+					/>
 					<Column title='运动时间(秒)' dataIndex='duration'
 					        key='duration' />
 					<Column title='每次休息时间(秒)' dataIndex='single_time'
@@ -41,14 +53,11 @@ export default class OverallStatistics extends React.Component {
 					<Column title='运动分的次数' dataIndex='number_of_times'
 					        key='number_of_times' />
 					<Column
-						title='Action'
-						key='action'
-						render={(text, record: { lastName: string }) => (
-							<Space size='middle'>
-								<a>Invite {record.lastName}</a>
-								<a>Delete</a>
-							</Space>
-						)}
+						title='运动日期'
+						dataIndex='ctime'
+						key='ctime'
+						render={(text) => <Space
+							size='middle'>{translateDate(text)}</Space>}
 					/>
 				</Table>
 			</div>
