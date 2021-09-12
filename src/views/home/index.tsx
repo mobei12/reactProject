@@ -9,22 +9,8 @@ import { PieChartOutlined, UserOutlined } from '@ant-design/icons'
 import routes from '../../routes/index'
 
 
-function handleMenuClick(e: object) {
-	console.log('click', e)
-}
-
 const { SubMenu } = Menu
 const { Header, Content, Footer, Sider } = Layout
-const menu = (
-	<Menu onClick={handleMenuClick}>
-		<Menu.Item key='1' icon={<UserOutlined />}>
-			个人中心
-		</Menu.Item>
-		<Menu.Item key='2' icon={<UserOutlined />}>
-			退出登录
-		</Menu.Item>
-	</Menu>
-)
 
 export default class Home extends React.Component<RouteComponentProps> {
 	state = {
@@ -36,14 +22,33 @@ export default class Home extends React.Component<RouteComponentProps> {
 		super(props)
 	}
 
-	isLogin = () => {
-		if (!localStorage.getItem('user')) {
+	/*退出登录*/
+	handleMenuClick = (e: { key: string }) => {
+		if (e.key === '2') {
+			localStorage.removeItem('token')
 			this.props.history.push('/login')
 		}
 	}
+	/*判断是否登录状态*/
+	isLogin = () => {
+		if (!localStorage.getItem('token')) {
+			this.props.history.push('/login')
+		}
+	}
+	/*菜单折叠*/
 	onCollapse = (collapsed: boolean) => {
 		this.setState({ collapsed })
 	}
+	menu = (
+		<Menu onClick={this.handleMenuClick}>
+			<Menu.Item key='1' icon={<UserOutlined />}>
+				个人中心
+			</Menu.Item>
+			<Menu.Item key='2' icon={<UserOutlined />}>
+				退出登录
+			</Menu.Item>
+		</Menu>
+	)
 
 	componentDidMount() {
 		this.isLogin()
@@ -91,9 +96,10 @@ export default class Home extends React.Component<RouteComponentProps> {
 							<div className='left' />
 							<div className='ant-space'>
 								<div className='ant-space-item'>
-									<Dropdown.Button overlay={menu}
-									                 placement='bottomCenter'
-									                 icon={<UserOutlined />}>
+									<Dropdown.Button
+										overlay={this.menu}
+										placement='bottomCenter'
+										icon={<UserOutlined />}>
 										漠北哥哥
 									</Dropdown.Button>
 								</div>

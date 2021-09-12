@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { message } from 'antd'
 
 
 const qs = require('qs')
@@ -139,7 +140,11 @@ service.interceptors.response.use(
 	(response: AxiosResponse) => {
 		const status = response.status
 		let msg = ''
-		if (!response.data.token && response.data.message === 'token失效') {
+		if (status === 401) {
+			localStorage.removeItem('token')
+			message.warning(showStatus(status)).then(() => {
+				window.location.reload()
+			})
 		}
 		if (status < 200 || status >= 300) {
 			// 处理http错误，抛到业务代码

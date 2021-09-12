@@ -4,6 +4,7 @@ export interface HttpResponse {
 	data: {
 		code: number;
 		desc: string;
+		token: string;
 		[key: string]: any;
 	};
 }
