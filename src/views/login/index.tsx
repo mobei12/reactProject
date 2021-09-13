@@ -1,3 +1,5 @@
+// noinspection JSIgnoredPromiseFromCall
+
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import './index.scss'
@@ -24,6 +26,7 @@ export default class Login extends React.Component<RouteComponentProps> {
 			if (code === 200) {
 				if (response.data.token) {
 					message.success(msg)
+					localStorage.setItem('user', JSON.stringify(response.data.user))
 					localStorage.setItem('token', response.data.token)
 					this.props.history.push('/home')
 				} else {

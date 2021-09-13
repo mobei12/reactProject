@@ -13,7 +13,7 @@ class loadingComponent extends Component {
 		NProgress.start()
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		NProgress.done()
 	}
 

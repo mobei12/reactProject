@@ -50,6 +50,7 @@
 		]
 	},
 	"proxy": "http://localhost:8000",
+	"homepage": "/admin",
 	"devDependencies": {
 		"@types/nprogress": "^0.2.0",
 		"@types/react-router-dom": "^5.1.8"
