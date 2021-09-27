@@ -35,12 +35,12 @@ export default class Home extends React.Component<RouteComponentProps> {
 	isLogin = () => {
 		/*获取用户对象*/
 		const usertStr: string | null = localStorage.getItem('user')
-		let user: { username?: string } = JSON.parse(typeof usertStr === 'string' ? usertStr : '')
-		if (!localStorage.getItem('token') || !user) {
+		if (!usertStr) {
 			this.props.history.push('/login')
-		} else {
-			this.setState({ username: user.username })
+			return
 		}
+		let user: { username?: string } = JSON.parse(usertStr)
+		this.setState({ username: user.username })
 	}
 	/*菜单折叠*/
 	onCollapse = (collapsed: boolean) => {
@@ -139,5 +139,5 @@ export default class Home extends React.Component<RouteComponentProps> {
 				</Layout>
 			</Layout>
 		)
-    }
+	}
 }

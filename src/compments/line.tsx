@@ -38,6 +38,13 @@ export default class ChartsLine extends React.Component<Props> {
 		})
 	}
 
+	componentWillReceiveProps(newProps: Props) {
+		let { data } = newProps
+		this.setState({
+			data
+		})
+	}
+
 	render() {
 		let { data, config } = this.state
 		config = Object.assign(config, { data: data })
