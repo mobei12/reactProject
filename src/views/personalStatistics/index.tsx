@@ -1,6 +1,19 @@
 import React, { FC } from 'react'
 import './index.scss'
+import loadable from '../../utils/loadable'
 
-
-const App: FC = () => <div className='App'>个人统计</div>
-export default App
+const ChartsLine = loadable(() => import('../../compments/line'))
+export default class PersonalStatistics extends React.Component {
+  render() {
+    return (
+      <div className='personal-statistics'>
+        <ChartsLine  />
+        <ChartsLine  />
+        <ChartsLine  />
+        <ChartsLine  />
+        <ChartsLine  />
+        <ChartsLine  />
+        </div>
+    )
+    }
+}

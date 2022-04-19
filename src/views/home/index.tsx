@@ -97,7 +97,7 @@ export default class Home extends React.Component<RouteComponentProps> {
 				</Sider>
 				<Layout className='site-layout'>
 					<Header className='site-layout-background'
-					        style={{ padding: 0 }}>
+					        style={{ padding: 0, }}>
 						<div className='ant-pro-global-header'>
 							<div className='left' />
 							<div className='ant-space'>
@@ -112,13 +112,13 @@ export default class Home extends React.Component<RouteComponentProps> {
 							</div>
 						</div>
 					</Header>
-					<Content style={{ margin: '0 16px' }}>
+					<Content style={{ margin: '0 16px',display: 'flex' ,flexDirection: 'column' }}>
 						<Breadcrumb style={{ margin: '16px 0' }}>
 							<Breadcrumb.Item>User</Breadcrumb.Item>
 							<Breadcrumb.Item>Bill</Breadcrumb.Item>
 						</Breadcrumb>
 						<div className='site-layout-background'
-						     style={{ padding: 24, minHeight: 360 }}>
+						     style={{ padding: 24, flex: 1 }}>
 							<Switch>
 								{routes.map((item) => {
 									return (

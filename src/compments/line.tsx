@@ -31,7 +31,8 @@ export default class ChartsLine extends React.Component<Props> {
 
 	componentDidMount() {
 		let { data, config } = this.props
-		config = config ? Object.assign(config, this.state.config) : this.state.config
+		config = config ? Object.assign(config, this.state.config) : this.state.config;
+		data = data || this.state.data;
 		this.setState({
 			data,
 			config
