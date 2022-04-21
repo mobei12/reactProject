@@ -1,0 +1,36 @@
+name: NodeJS with react
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout #检出
+              uses: actions/checkout@main #检出的依赖2
+              with:
+                  persist-credentials: false #不保存证书
+            - name: Cache Node Dependencies #设置依赖缓存
+              id: cache
+              uses: actions/cache@v1
+              with:
+                  path: node_modules
+                  key: ${{runner.os}}-npm-caches-${{ hashFiles('package-lock.json')}}
+            - name: Install Dependencies #安装依赖
+              if: steps.cache.outputs.cache-hit != 'true'
+              run: |
+                  npm install --force
+            - name: build project
+              run: |
+                  npm  run build
+            - name: deploy file to server
+              uses: easingthemes/ssh-deploy@v2.0.7 #远程发布工作流
+              env:
+                  REMOTE_USER: 'root' #ssh user name
+                  REMOTE_HOST: ${{secrets.HOST}} #目标地址,在github secrets中设置
+                  ARGS: '-avz --delete' #参数
+                  SSH_PRIVATE_KEY: ${{secrets.ACCESS_TOKEN}} #github access token
+                  SOURCE: 'build/' #源文件目录
+                  TARGET: '/data/webStatic/admin' #目标文件目录
