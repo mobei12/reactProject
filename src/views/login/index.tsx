@@ -40,7 +40,7 @@ export default class Login extends React.Component<RouteComponentProps> {
     render() {
         return (
             <>
-                <Title level={2}>这就是个自动登录页</Title>
+                <Title level={2}>这就是个登录页</Title>
                 <Form
                     name='normal_login'
                     className='login-form'
