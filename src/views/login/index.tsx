@@ -13,7 +13,7 @@ export default class Login extends React.Component<RouteComponentProps> {
         super(props);
     }
 
-    onFinish = (values: any) => {
+    onFinish = (values: { username: string, password: string }) => {
         Axios('/api/user/login', {
             method: 'POST',
             responseType: 'json',
